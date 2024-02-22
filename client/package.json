@@ -10,7 +10,9 @@
   },
   "dependencies": {
     "axios": "^1.6.7",
-    "vue": "^3.4.15"
+    "vue": "^3.4.15",
+    "vue-router": "^4.3.0",
+    "youtube-dl-exec": "^2.5.7"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.3",

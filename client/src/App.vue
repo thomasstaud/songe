@@ -1,17 +1,11 @@
-<script setup>
-import Home from './components/Home.vue'
-import Library from './components/Library.vue'
-</script>
-
 <template>
   <header class="navbar bg-base-100">
-    <a class="btn btn-ghost text-xl">Home</a>
-    <a class="btn btn-ghost text-xl">Library</a>
+    <router-link to="/" class="btn btn-ghost text-xl">HOME</router-link>
+    <router-link to="/artists" class="btn btn-ghost text-xl">ARTISTS</router-link>
+    <router-link to="/tracks" class="btn btn-ghost text-xl">TRACKS</router-link>
   </header>
 
   <main>
-
+    <router-view></router-view>
   </main>
-  <home />
-  <library />
 </template>
