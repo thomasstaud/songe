@@ -12,7 +12,7 @@
     "axios": "^1.6.7",
     "vue": "^3.4.15",
     "vue-router": "^4.3.0",
-    "youtube-dl-exec": "^2.5.7"
+    "vue3-youtube": "^0.1.9"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.3",

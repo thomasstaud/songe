@@ -1,6 +1,12 @@
 <template>
     <div class="p-5">
         <button @click="get_data()" class="btn">Get Data</button>
+        
+        <YouTube 
+            v-if="url != null"
+            :src="url"
+            @ready="onReady"
+            ref="youtube" />
 
         <table class="table">
             <thead>
@@ -16,7 +22,7 @@
                 <td>{{ t.artist }}</td>
                 <td>{{ t.playcount }}</td>
                 <td>
-                    <button class="btn btn-ghost">Play</button>
+                    <button class="btn btn-ghost" @click="get_video(t)">Play</button>
                 </td>
             </tr>
             </tbody>
@@ -26,28 +32,34 @@
 
 
 <script>
+import YouTube from 'vue3-youtube'
+
 import * as api from "../api.js";
-import youtubedl from 'youtube-dl-exec'
+import * as yt from "../youtube.js";
 
 export default {
     data() {
         return {
             tracks: null,
+            url: null,
         }
     },
     methods: {
         async get_data() {
             this.tracks = await api.get_tracks();
         },
-        async download_track() {
-            youtubedl('https://www.youtube.com/watch?v=6xKWiCMKKJg', {
-                dumpSingleJson: true,
-                noCheckCertificates: true,
-                noWarnings: true,
-                preferFreeFormats: true,
-                addHeader: ['referer:youtube.com', 'user-agent:googlebot']
-            }).then(output => console.log(output))
-        }
+        async get_video(track) {
+            let query = `${track.name} ${track.artist}`;
+            let res = await yt.get_url(query);
+            let id = res.items[0].id.videoId;
+            console.log(id);
+            this.url = `https://www.youtube.com/watch?v=${id}`;
+            console.log(this.url);
+        },
+        onReady() {
+            this.$refs.youtube.playVideo()
+        },
     },
+    components: { YouTube },
 }
 </script>
