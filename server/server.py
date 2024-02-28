@@ -11,11 +11,12 @@ api = Api(app)
 
 config = yaml.safe_load(open('config.yml'))
 username = config['username']
-api_key = config['api_key']
+last_fm_api_key = config['last_fm_api_key']
+youtube_api_key = config['youtube_api_key']
 
 @app.route('/artists')
 def artists():
-    url = f"http://ws.audioscrobbler.com/2.0/?method=library.getartists&api_key={api_key}&user={username}&format=json"
+    url = f"http://ws.audioscrobbler.com/2.0/?method=library.getartists&user={username}&api_key={last_fm_api_key}&format=json"
     response = requests.get(url)
     data = json.loads(response.text)
 
@@ -30,7 +31,7 @@ def artists():
 
 @app.route('/tracks')
 def tracks():
-    url = f"http://ws.audioscrobbler.com/2.0/?method=user.gettoptracks&user={username}&api_key={api_key}&format=json"
+    url = f"http://ws.audioscrobbler.com/2.0/?method=user.gettoptracks&user={username}&api_key={last_fm_api_key}&format=json"
     response = requests.get(url)
     data = json.loads(response.text)
     print(data)
@@ -44,6 +45,19 @@ def tracks():
         res.append(track)
     
     return res
+
+@app.route('/search_video')
+def search_video():
+    query = request.args.get('query')
+    url = f"https://www.googleapis.com/youtube/v3/search?key={youtube_api_key}&type=video&part=snippet&q={query}"
+    response = requests.get(url)
+    data = json.loads(response.text)
+    print(data)
+
+    id = data["items"][0]["id"]["videoId"]
+    print(id)
+    return id
+
 
 if __name__ == '__main__':
     app.run(debug=True)

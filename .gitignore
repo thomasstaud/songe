@@ -1,3 +1,4 @@
 
 server/config.yml
 server/artists-example-data.json
+client/.env

@@ -6,7 +6,8 @@
             v-if="url != null"
             :src="url"
             @ready="onReady"
-            ref="youtube" />
+            ref="youtube"
+            hidden/>
 
         <table class="table">
             <thead>
@@ -35,7 +36,6 @@
 import YouTube from 'vue3-youtube'
 
 import * as api from "../api.js";
-import * as yt from "../youtube.js";
 
 export default {
     data() {
@@ -49,9 +49,7 @@ export default {
             this.tracks = await api.get_tracks();
         },
         async get_video(track) {
-            let query = `${track.name} ${track.artist}`;
-            let res = await yt.get_url(query);
-            let id = res.items[0].id.videoId;
+            let id = await api.get_video_id(track);
             console.log(id);
             this.url = `https://www.youtube.com/watch?v=${id}`;
             console.log(this.url);
