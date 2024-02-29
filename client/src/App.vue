@@ -10,8 +10,7 @@
   </header>
 
   <main>
-    <now-playing />
-
     <router-view></router-view>
+    <now-playing />
   </main>
 </template>

@@ -1,8 +1,7 @@
 <template>
     <div class="p-5">
-        <button @click="get_data()" class="btn">Get Data</button>
-
-        <table class="table">
+        <span v-if="artists == null" class="loading loading-dots loading-sm"></span>
+        <table v-if="artists != null" class="table">
             <thead>
             <tr>
                 <th>Artist</th>
@@ -29,10 +28,8 @@ export default {
             artists: null,
         }
     },
-    methods: {
-        async get_data() {
-            this.artists = await api.get_artists();
-        }
-    },
+    async mounted() {
+        this.artists = await api.get_artists();
+    }
 }
 </script>

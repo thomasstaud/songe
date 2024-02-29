@@ -25,7 +25,7 @@ const store = createStore({
       }
     },
     mutations: {
-      set_id (state, track) {
+      set_track (state, track) {
         state.playingTrack = track;
       }
     }

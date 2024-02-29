@@ -1,8 +1,7 @@
 <template>
     <div class="p-5">
-        <button @click="get_data()" class="btn">Get Data</button>
-
-        <table class="table">
+        <span v-if="tracks == null" class="loading loading-dots loading-sm"></span>
+        <table v-if="tracks != null" class="table">
             <thead>
             <tr>
                 <th>Track</th>
@@ -16,7 +15,7 @@
                 <td>{{ t.artist }}</td>
                 <td>{{ t.playcount }}</td>
                 <td>
-                    <button class="btn btn-ghost" @click="play_track(t)">Play</button>
+                    <button class="fa fa-play btn btn-ghost" @click="this.$store.commit('set_track', t)"></button>
                 </td>
             </tr>
             </tbody>
@@ -35,15 +34,8 @@ export default {
             url: null,
         }
     },
-    methods: {
-        async get_data() {
-            this.tracks = await api.get_tracks();
-        },
-        async play_track(track) {
-            console.log("emitting event!");
-            this.$store.commit('set_id', track);
-            console.log(this.$store.state.playingTrack);
-        }
-    },
+    async mounted() {
+        this.tracks = await api.get_tracks();
+    }
 }
 </script>
