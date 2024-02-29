@@ -1,13 +1,6 @@
 <template>
     <div class="p-5">
         <button @click="get_data()" class="btn">Get Data</button>
-        
-        <YouTube 
-            v-if="url != null"
-            :src="url"
-            @ready="onReady"
-            ref="youtube"
-            hidden/>
 
         <table class="table">
             <thead>
@@ -23,7 +16,7 @@
                 <td>{{ t.artist }}</td>
                 <td>{{ t.playcount }}</td>
                 <td>
-                    <button class="btn btn-ghost" @click="get_video(t)">Play</button>
+                    <button class="btn btn-ghost" @click="play_track(t)">Play</button>
                 </td>
             </tr>
             </tbody>
@@ -33,8 +26,6 @@
 
 
 <script>
-import YouTube from 'vue3-youtube'
-
 import * as api from "../api.js";
 
 export default {
@@ -48,16 +39,11 @@ export default {
         async get_data() {
             this.tracks = await api.get_tracks();
         },
-        async get_video(track) {
-            let id = await api.get_video_id(track);
-            console.log(id);
-            this.url = `https://www.youtube.com/watch?v=${id}`;
-            console.log(this.url);
-        },
-        onReady() {
-            this.$refs.youtube.playVideo()
-        },
+        async play_track(track) {
+            console.log("emitting event!");
+            this.$store.commit('set_id', track);
+            console.log(this.$store.state.playingTrack);
+        }
     },
-    components: { YouTube },
 }
 </script>

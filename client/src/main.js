@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import './style.css'
 import App from './App.vue'
+import { createStore } from 'vuex'
 
 import { createRouter, createWebHistory } from 'vue-router'
 
@@ -17,6 +18,20 @@ const router = createRouter({
     ]
 });
 
+const store = createStore({
+    state () {
+      return {
+        playingTrack: null
+      }
+    },
+    mutations: {
+      set_id (state, track) {
+        state.playingTrack = track;
+      }
+    }
+  })
+
 const app = createApp(App)
 app.use(router);
-app.mount('#app')
+app.use(store);
+app.mount('#app');
