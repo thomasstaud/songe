@@ -5,16 +5,18 @@ import { createStore } from 'vuex'
 
 import { createRouter, createWebHistory } from 'vue-router'
 
-import Home from './components/Home.vue'
-import Artists from './components/Artists.vue'
-import Tracks from './components/Tracks.vue'
+import Home from './views/Home.vue'
+import Artists from './views/Artists.vue'
+import Tracks from './views/Tracks.vue'
+import Statistics from './views/Statistics.vue'
 
 const router = createRouter({
     history: createWebHistory(),
     routes: [
         { path: '/', name: 'home', component: Home },
         { path: '/artists', name: 'artists', component: Artists},
-        { path: '/tracks', name: 'tracks', component: Tracks}
+        { path: '/tracks', name: 'tracks', component: Tracks},
+        { path: '/statistics', name: 'statistics', component: Statistics}
     ]
 });
 

@@ -60,7 +60,6 @@ export default {
         }
     },
     components: { YouTube },
-    // todo: watch playedTrack
     watch: {
        '$store.state.playingTrack': function() {
             this.track = this.$store.state.playingTrack

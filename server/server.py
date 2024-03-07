@@ -6,7 +6,7 @@ import json
 import requests
 
 app = Flask(__name__)
-cors = CORS(app)
+CORS(app)
 api = Api(app)
 
 config = yaml.safe_load(open('config.yml'))
@@ -16,12 +16,12 @@ youtube_api_key = config['youtube_api_key']
 
 @app.route('/artists')
 def artists():
-    url = f"http://ws.audioscrobbler.com/2.0/?method=library.getartists&user={username}&api_key={last_fm_api_key}&format=json"
+    url = f"http://ws.audioscrobbler.com/2.0/?method=user.gettopartists&user={username}&api_key={last_fm_api_key}&format=json"
     response = requests.get(url)
     data = json.loads(response.text)
 
     res = []
-    for a in data["artists"]["artist"]:
+    for a in data["topartists"]["artist"]:
         artist = {}
         artist["name"] = a["name"]
         artist["playcount"] = a["playcount"]
