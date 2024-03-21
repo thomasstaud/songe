@@ -1,5 +1,5 @@
 <template>
-<div v-if="track != null" class="fixed card p-5 bg-base-100 shadow-xl w-2000 right-10 bottom-10">
+<div v-if="track != null" class="fixed card card-bordered p-5 bg-base-content text-base-100 shadow-xl w-2000 right-10 bottom-10">
     <YouTube 
         v-if="url != null"
         v-show="video"
@@ -11,6 +11,7 @@
     <div class="flex justify-end">
         <button v-if="playing" @click="togglePause()" class="fa fa-pause btn btn-ghost text-xs"></button>
         <button v-if="!playing" @click="togglePause()" class="fa fa-play btn btn-ghost text-xs"></button>
+        <button @click="this.$store.commit('set_track', null)" class="fa fa-stop btn btn-ghost"></button>
 
         <div class="px-5">
             <span class="font-bold">{{ track.name }}</span> <br>

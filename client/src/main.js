@@ -7,6 +7,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import Home from './views/Home.vue'
 import Artists from './views/Artists.vue'
+import Similar from './views/Similar.vue'
 import Tracks from './views/Tracks.vue'
 import Statistics from './views/Statistics.vue'
 
@@ -15,6 +16,7 @@ const router = createRouter({
     routes: [
         { path: '/', name: 'home', component: Home },
         { path: '/artists', name: 'artists', component: Artists},
+        { path: '/similar/:artist', name: 'similar', component: Similar},
         { path: '/tracks', name: 'tracks', component: Tracks},
         { path: '/statistics', name: 'statistics', component: Statistics}
     ]

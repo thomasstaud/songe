@@ -15,3 +15,8 @@ export async function get_tracks() {
     const response = await axios.get(`http://localhost:5000/tracks`, {});
     return response.data;
 }
+
+export async function get_similar_artists(artist) {
+    const response = await axios.get(`http://localhost:5000/similar?artist=${artist}`, {});
+    return response.data;
+}

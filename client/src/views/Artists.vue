@@ -6,12 +6,16 @@
             <tr>
                 <th>Artist</th>
                 <th>Playcount</th>
+                <th>Find similar</th>
             </tr>
             </thead>
             <tbody>
             <tr v-for="a in artists">
                 <td>{{ a.name }}</td>
                 <td>{{ a.playcount }}</td>
+                <td>
+                    <router-link :to="'/similar/' + a.name" class="fa fa-search btn btn-ghost"></router-link>
+                </td>
             </tr>
             </tbody>
         </table>
@@ -30,6 +34,11 @@ export default {
     },
     async mounted() {
         this.artists = await api.get_artists();
+        // replace "&" with "and"
+        this.artists = this.artists.map(a => {
+            a.name = a.name.replace("&", "and");
+            return a;
+        })
     }
 }
 </script>

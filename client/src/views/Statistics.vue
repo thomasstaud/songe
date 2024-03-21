@@ -15,7 +15,11 @@ export default {
     data() {
         return {
             data: "",
-            layout: { title: "Plays by Artist" }
+            layout: {
+                plot_bgcolor: "rgba(0,0,0,0)",
+                paper_bgcolor: "rgba(0,0,0,0)",
+                title: "Plays by Artist"
+            }
         }
     },
     async mounted() {
